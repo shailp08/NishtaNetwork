@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nishta Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f2e8d5;
+    --paper-dark:#e9dbbd;
+    --ink:#4a3423;
+    --ink-soft:#7a5d43;
+    --maroon:#8c2f2f;
+    --maroon-dark:#6f2222;
+    --mustard:#d99a2b;
+    --olive:#6b7a3a;
+    --teal:#3d7069;
+    --border:#c9a86a;
+    --card-shadow: 0 3px 0 rgba(74,52,35,0.15);
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 10% 15%, rgba(255,255,255,0.35), transparent 40%),
+      var(--paper);
+    font-family:'Poppins', sans-serif;
+    color:var(--ink);
+    padding:14px;
+  }
+
+  .tv{
+    max-width:1400px;
+    margin:0 auto;
+    border:3px solid var(--border);
+    border-radius:22px;
+    background: repeating-linear-gradient(135deg, rgba(201,168,106,0.06) 0px, rgba(201,168,106,0.06) 2px, transparent 2px, transparent 14px), var(--paper);
+    padding:16px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    display:grid;
+    grid-template-columns: auto 1fr auto;
+    align-items:center;
+    gap:18px;
+    background:var(--paper-dark);
+    border:2px solid var(--border);
+    border-radius:16px;
+    padding:12px 20px;
+    margin-bottom:14px;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .lion{
+    width:56px; height:56px; border-radius:50%;
+    background:var(--maroon);
+    display:flex; align-items:center; justify-content:center;
+    font-size:30px; flex-shrink:0;
+    box-shadow: inset 0 0 0 3px var(--mustard);
+  }
+  .brand h1{
+    font-family:'Baloo 2', sans-serif;
+    font-size:30px;
+    margin:0;
+    color:var(--maroon-dark);
+    letter-spacing:1px;
+    line-height:1;
+  }
+  .brand .tagline{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
+    font-weight:500;
+  }
+
+  .quote-bubble{
+    justify-self:center;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#fffaf0;
+    border:2px solid var(--border);
+    border-radius:16px;
+    padding:8px 18px;
+    max-width:520px;
+  }
+  .quote-bubble .quote-icon{ font-size:22px; color:var(--mustard); flex-shrink:0; }
+  .quote-bubble .qtext{ font-family:'Baloo 2', sans-serif; font-size:16px; font-weight:600; color:var(--ink); line-height:1.15; }
+  .quote-bubble .qtext::after{ content:'\201D'; color:var(--mustard); font-size:22px; margin-left:4px; line-height:0; vertical-align:-0.15em; }
+  .quote-bubble .qauthor{ font-size:11px; color:var(--ink-soft); margin-top:2px; }
+  .avatar{
+    width:52px; height:52px; border-radius:50%;
+    background: linear-gradient(160deg,#f4d9a3,#e0b978);
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px; border:2px solid var(--mustard); flex-shrink:0;
+  }
+
+  .header-side{ display:flex; align-items:center; gap:14px; }
+  .photo-panel{
+    width:84px; height:84px;
+    border-radius:50%;
+    overflow:hidden;
+    border:2px solid var(--mustard);
+    box-shadow:var(--card-shadow);
+    flex-shrink:0;
+    background:linear-gradient(160deg,#f4d9a3,#e0b978);
+  }
+  .photo-panel img{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center center;
+    filter:sepia(0.12) saturate(1.05) brightness(1.02);
+  }
+
+  .clockbox{
+    text-align:right;
+    display:flex; align-items:center; gap:10px;
+  }
+  .clockbox .cicon{ font-size:22px; color:var(--maroon); }
+  .clockbox .time{ font-family:'Baloo 2',sans-serif; font-size:22px; font-weight:700; color:var(--maroon-dark); line-height:1; }
+  .clockbox .date{ font-size:11px; color:var(--ink-soft); margin-top:2px; }
+
+  /* ---------- MAIN GRID ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap:14px;
+  }
+
+  .card{
+    position:relative;
+    background:#fdf6e6;
+    border:2px solid var(--border);
+    border-radius:16px;
+    box-shadow:var(--card-shadow);
+    padding:14px 16px 16px;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute; top:10px; right:10px;
+    width:8px; height:8px; border-radius:50%;
+    background:var(--mustard); opacity:.6;
+  }
+  .card-title{
+    font-family:'Baloo 2', sans-serif;
+    font-size:15px;
+    font-weight:700;
+    color:var(--maroon-dark);
+    display:flex; align-items:center; gap:8px;
+    margin:0 0 10px 0;
+    padding-bottom:8px;
+    border-bottom:2px dashed var(--border);
+  }
+  .card-title .live{
+    margin-left:auto;
+    background:var(--maroon);
+    color:#fff;
+    font-size:10px;
+    font-weight:700;
+    padding:2px 8px;
+    border-radius:20px;
+    letter-spacing:.5px;
+  }
+
+  /* Upcoming events */
+  .col-events{ display:flex; flex-direction:column; }
+  .events-list{ display:flex; flex-direction:column; gap:8px; }
+  .event-row{
+    display:flex; align-items:center; gap:12px;
+    background:var(--paper-dark);
+    border:1.5px solid var(--border);
+    border-radius:12px;
+    padding:8px 10px;
+  }
+  .event-badge{
+    background:var(--maroon);
+    color:#fff;
+    border-radius:10px;
+    width:52px; height:52px;
+    flex-shrink:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-family:'Baloo 2', sans-serif;
+  }
+  .event-badge .m{ font-size:10px; font-weight:700; letter-spacing:.5px; opacity:.9; }
+  .event-badge .d{ font-size:20px; font-weight:800; line-height:1; }
+  .event-info{ flex:1; }
+  .event-info .name{ font-weight:600; font-size:13.5px; color:var(--ink); }
+  .event-info .sub{ font-size:11px; color:var(--ink-soft); margin-top:1px; }
+  .event-emoji{ font-size:22px; flex-shrink:0; }
+
+  .more-link{
+    margin-top:auto;
+    padding-top:10px;
+    font-size:11.5px;
+    color:var(--olive);
+    font-weight:600;
+    text-align:center;
+    border-top:2px dashed var(--border);
+    margin-top:10px;
+  }
+
+  /* Tracker */
+  .map-wrap{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    border:1.5px solid var(--border);
+    background: linear-gradient(160deg,#dceee6,#c9e3da);
+    aspect-ratio:2/1;
+  }
+  .map-wrap{ background:#fff; }
+  .map-wrap .world-map{ position:absolute; inset:0; width:100%; height:100%; display:block; object-fit:cover; }
+  .map-wrap .route{ position:absolute; inset:0; width:100%; height:100%; }
+  .pin{ position:absolute; transform:translate(-50%,-50%); display:flex; align-items:center; }
+  .pin .dot{ width:14px; height:14px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.35); flex-shrink:0; }
+  .pin-current .dot{ background:#8c2f2f; animation:pulse 2s infinite; }
+  .pin-next .dot{ background:#d99a2b; }
+  .pin-label{ position:absolute; white-space:nowrap; font-size:12px; font-weight:700; background:rgba(255,255,255,.92); border:1px solid var(--border); border-radius:10px; padding:1px 8px; }
+  .pin-current .pin-label{ right:20px; color:#5c2020; }
+  .pin-next .pin-label{ left:20px; color:#7a5d13; }
+  @keyframes pulse{ 0%{ box-shadow:0 0 0 0 rgba(140,47,47,.6);} 70%{ box-shadow:0 0 0 14px rgba(140,47,47,0);} 100%{ box-shadow:0 0 0 0 rgba(140,47,47,0);} }
+  .tracker-info{ margin-top:10px; font-size:12px; }
+  .tracker-info .loc{ font-weight:700; color:var(--maroon-dark); display:flex; align-items:center; gap:6px; }
+  .tracker-info .meta{ color:var(--ink-soft); margin-top:2px; }
+  .next-stop{
+    margin-top:8px;
+    background:var(--paper-dark);
+    border-radius:10px;
+    padding:6px 10px;
+    font-size:11.5px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .did-you-know{
+    margin-top:10px;
+    background: #fdf1d8;
+    border:1.5px dashed var(--mustard);
+    border-radius:12px;
+    padding:8px 10px;
+    font-size:11.5px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .did-you-know b{ color:var(--maroon-dark); }
+
+  .play-btn{
+    background:var(--olive);
+    color:#fff; border:none;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700; font-size:12px;
+    padding:8px 14px;
+    border-radius:20px;
+    cursor:pointer;
+    box-shadow:0 2px 0 #4f5a29;
+  }
+  .play-btn:active{ transform:translateY(2px); box-shadow:none; }
+
+  /* ---------- QUIZ MODAL ---------- */
+  .quiz-overlay{
+    display:none;
+    position:fixed; inset:0;
+    background:rgba(74,52,35,0.55);
+    z-index:100;
+    align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .quiz-overlay.open{ display:flex; }
+  .quiz-box{
+    background:#fdf6e6;
+    border:3px solid var(--border);
+    border-radius:20px;
+    max-width:480px;
+    width:100%;
+    padding:22px 24px 24px;
+    position:relative;
+    box-shadow:0 10px 0 rgba(74,52,35,0.18);
+    max-height:90vh;
+    overflow-y:auto;
+  }
+  .quiz-close{
+    position:absolute; top:12px; right:14px;
+    background:none; border:none;
+    font-size:20px; color:var(--ink-soft);
+    cursor:pointer; line-height:1;
+  }
+  .quiz-header{
+    font-family:'Baloo 2', sans-serif;
+    font-size:19px; font-weight:700;
+    color:var(--maroon-dark);
+    display:flex; align-items:center; gap:8px;
+    margin-bottom:6px;
+  }
+  .quiz-progress-track{
+    height:8px; border-radius:6px;
+    background:var(--paper-dark);
+    border:1px solid var(--border);
+    overflow:hidden;
+    margin:10px 0 18px;
+  }
+  .quiz-progress-fill{
+    height:100%;
+    background:var(--olive);
+    border-radius:6px;
+    transition:width .3s ease;
+  }
+  .quiz-question{
+    font-family:'Baloo 2', sans-serif;
+    font-size:17px; font-weight:600;
+    color:var(--ink);
+    margin-bottom:16px;
+    line-height:1.3;
+  }
+  .quiz-options{ display:flex; flex-direction:column; gap:10px; }
+  .quiz-opt{
+    text-align:left;
+    background:var(--paper-dark);
+    border:2px solid var(--border);
+    border-radius:12px;
+    padding:10px 14px;
+    font-family:'Poppins', sans-serif;
+    font-size:13.5px;
+    font-weight:500;
+    color:var(--ink);
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .quiz-opt:hover{ background:#f4e4bf; }
+  .quiz-opt.correct{ background:#dcead0; border-color:var(--olive); color:#3a4a1e; font-weight:700; }
+  .quiz-opt.incorrect{ background:#f3d9d3; border-color:var(--maroon); color:var(--maroon-dark); font-weight:700; }
+  .quiz-opt:disabled{ cursor:default; }
+  .quiz-explain{
+    margin-top:12px;
+    font-size:12px;
+    color:var(--ink-soft);
+    background:#fdf1d8;
+    border:1.5px dashed var(--mustard);
+    border-radius:10px;
+    padding:8px 10px;
+    display:none;
+  }
+  .quiz-explain.show{ display:block; }
+  .quiz-next{
+    margin-top:16px;
+    background:var(--maroon);
+    color:#fff; border:none;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700; font-size:13px;
+    padding:9px 16px;
+    border-radius:20px;
+    cursor:pointer;
+    display:none;
+    box-shadow:0 2px 0 var(--maroon-dark);
+  }
+  .quiz-next.show{ display:inline-block; }
+  .quiz-results{ display:none; text-align:center; }
+  .quiz-results.show{ display:block; }
+  .quiz-results .emoji{ font-size:44px; }
+  .quiz-results .score{
+    font-family:'Baloo 2', sans-serif;
+    font-size:24px; font-weight:800;
+    color:var(--maroon-dark);
+    margin:8px 0 4px;
+  }
+  .quiz-results .msg{ font-size:13px; color:var(--ink-soft); margin-bottom:18px; }
+  .quiz-retry{
+    background:var(--olive); color:#fff; border:none;
+    font-family:'Baloo 2', sans-serif; font-weight:700; font-size:13px;
+    padding:9px 18px; border-radius:20px; cursor:pointer;
+    box-shadow:0 2px 0 #4f5a29;
+  }
+
+  /* ---------- FOOTER BAR ---------- */
+  .footer-bar{
+    margin-top:14px;
+    background:var(--paper-dark);
+    border:2px solid var(--border);
+    border-radius:16px;
+    padding:10px 18px;
+    display:grid;
+    grid-template-columns: 1fr;
+    align-items:center;
+    gap:14px;
+    font-size:12px;
+  }
+  .tagline-center{ font-family:'Baloo 2', sans-serif; font-weight:700; color:var(--maroon-dark); font-size:14px; display:flex; align-items:center; gap:8px; }
+  .quiz-cta{
+    display:flex; align-items:center; gap:10px;
+    background:#fffaf0;
+    border:1.5px solid var(--border);
+    border-radius:20px;
+    padding:6px 8px 6px 16px;
+    justify-self:center;
+  }
+  .quiz-cta .qc-text{ text-align:right; }
+  .quiz-cta .qc-title{ font-family:'Baloo 2', sans-serif; font-weight:700; color:var(--maroon-dark); font-size:12.5px; }
+  .quiz-cta .qc-sub{ color:var(--ink-soft); font-size:10.5px; }
+  .quiz-cta .qc-btn{
+    background:var(--maroon);
+    color:#fff; border:none;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700; font-size:11.5px;
+    padding:8px 14px;
+    border-radius:16px;
+    cursor:pointer;
+    box-shadow:0 2px 0 var(--maroon-dark);
+    white-space:nowrap;
+  }
+  .quiz-cta .qc-btn:active{ transform:translateY(2px); box-shadow:none; }
+
+  @media (max-width:1000px){
+    .grid{ grid-template-columns:1fr; }
+    header{ grid-template-columns:1fr; text-align:center; }
+    .quote-bubble{ max-width:100%; }
+    .clockbox{ justify-content:center; }
+    .footer-bar{ grid-template-columns:1fr; text-align:center; }
+    .quiz-cta{ justify-self:center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="tv">
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <div class="brand">
+      <div class="lion">🦁</div>
+      <div>
+        <h1>NISHTA NETWORK</h1>
+        <div class="tagline">Inspire. Connect. Grow. 💛</div>
+      </div>
+    </div>
+
+    <div class="quote-bubble">
+      <div class="quote-icon">&#8220;</div>
+      <div>
+        <div class="qtext" id="headerQuoteText">Faith is not a feeling, it is a decision to trust.</div>
+        <div class="qauthor" id="headerQuoteAuthor">— Mahant Swami Maharaj</div>
+      </div>
+      <div class="avatar">🙏</div>
+    </div>
+
+    <div class="header-side">
+      <div class="photo-panel"><img src="images/mahant-swami.jpg" alt="Mahant Swami Maharaj"></div>
+      <div class="clockbox">
+        <div class="cicon">🕐</div>
+        <div>
+          <div class="time" id="liveTime">--:--</div>
+          <div class="date" id="liveDate">Loading...</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ MAIN GRID ============ -->
+  <div class="grid">
+
+    <!-- UPCOMING EVENTS -->
+    <div class="card col-events">
+      <div class="card-title">🗓️ Upcoming Events</div>
+      <div class="events-list" id="eventsList"></div>
+      <div class="more-link">More updates coming soon...</div>
+    </div>
+
+    <!-- SWAMISHRI LIVE TRACKER -->
+    <div class="card">
+      <div class="card-title">📍 Swamishri Live Tracker <span class="live">LIVE</span></div>
+      <div class="map-wrap">
+        <img class="world-map" src="images/world-map.jpg" alt="World map">
+        <svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M48.9,31.8 Q60,32 69.4,50" fill="none" stroke="#8c2f2f" stroke-width="2.5" stroke-dasharray="6,5" vector-effect="non-scaling-stroke"/>
+        </svg>
+        <div class="pin pin-current" style="left:48.9%; top:31.8%;"><span class="dot"></span><span class="pin-label">London</span></div>
+        <div class="pin pin-next" style="left:69.4%; top:50%;"><span class="dot"></span><span class="pin-label">Ahmedabad</span></div>
+      </div>
+      <div class="tracker-info">
+        <div class="loc">📌 <span id="currentLoc">London, UK</span></div>
+        <div class="meta" id="currentDateTime">May 22, 2025 · 10:30 AM local</div>
+      </div>
+      <div class="next-stop">✈️ <span><b>Next stop:</b> <span id="nextStop">Ahmedabad (Oct 13–20) → Morbi (Oct 20 – Nov 4)</span></span></div>
+      <div class="did-you-know">💡 <span><b>Did you know?</b> <span id="funFact">Swamishri has visited over 60 countries to inspire millions.</span></span></div>
+    </div>
+
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="footer-bar">
+    <div class="quiz-cta">
+      <div class="qc-text">
+        <div class="qc-title">🎲 Satsang Quiz</div>
+        <div class="qc-sub">Test what you know!</div>
+      </div>
+      <button class="qc-btn" onclick="openQuiz()">PLAY</button>
+    </div>
+  </div>
+
+  <!-- ============ SATSANG QUIZ MODAL ============ -->
+  <div class="quiz-overlay" id="quizOverlay">
+    <div class="quiz-box">
+      <button class="quiz-close" onclick="closeQuiz()">✕</button>
+      <div class="quiz-header">🎲 Satsang Quiz</div>
+      <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgress"></div></div>
+
+      <div id="quizPlay">
+        <div class="quiz-question" id="quizQuestion"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-explain" id="quizExplain"></div>
+        <button class="quiz-next" id="quizNextBtn" onclick="nextQuestion()">Next →</button>
+      </div>
+
+      <div class="quiz-results" id="quizResults">
+        <div class="emoji" id="quizResultEmoji">🏆</div>
+        <div class="score" id="quizResultScore"></div>
+        <div class="msg" id="quizResultMsg"></div>
+        <button class="quiz-retry" onclick="openQuiz()">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* =====================================================================
+   EDIT ZONE — everything on this dashboard is controlled from here.
+   Update these values any time and just re-save/refresh the page.
+   ===================================================================== */
+
+// ---- Swamishri Live Tracker ----
+const tracker = {
+  location: "London, UK",
+  timeZone: "Europe/London",   // clock follows where Swamishri is (e.g. "Asia/Kolkata" for India)
+  timeZoneLabel: "",           // optional text shown after the time, e.g. "UK". Leave "" to auto-show BST/GMT/IST etc.
+  localDateTime: "Oct 11 · Today: Kishore-Kishori Din & Abhar Din · London vicharan ends Oct 13",
+  nextStop: "Ahmedabad (Oct 13–20) → Morbi (Oct 20 – Nov 4)",
+  funFact: "In Morbi, Swamishri will take part in the Vishvashanti Mahayagna, Murti-Pratishtha and Mandir Lokarpan on Oct 23–25. Then Gondal (Nov 4–14) and Tithal (Nov 14–30)."
+};
+
+// ---- Header quote (top banner) ----
+const headerQuote = {
+  text: "Faith is not a feeling, it is a decision to trust.",
+  author: "— Mahant Swami Maharaj"
+};
+
+// ---- Upcoming Events (BAPS calendar, verified via baps.org) ----
+// month: 3-letter abbreviation, day: number, name, sub: weekday/time, emoji: icon
+const events = [
+  { month:"OCT", day:11, name:"Navratri Begins",                      sub:"Sunday · 9 Nights of Devotion",                 emoji:"🪔" },
+  { month:"OCT", day:20, name:"Vijaya Dashmi",                        sub:"Tuesday · Swamishri arrives in Morbi",          emoji:"🏹" },
+  { month:"OCT", day:25, name:"Gunatitanand Swami Janma Jayanti",     sub:"Sunday · Morbi Mandir Lokarpan & Sharad Purnima", emoji:"🌕" },
+  { month:"NOV", day:8,  name:"Diwali",                               sub:"Sunday · Festival of Lights",                   emoji:"🎆" },
+  { month:"NOV", day:10, name:"Annakut & Bestu Varas",                sub:"Tuesday · Hindu New Year",                      emoji:"🍛" }
+];
+
+// ---- Satsang Quiz questions ----
+// options: array of 4 strings, correct: index (0-3) of the right answer, explain: short fun fact shown after answering
+const quizQuestions = [
+  {
+    q: "Who is the current Guru of BAPS Swaminarayan Sanstha?",
+    options: ["Mahant Swami Maharaj", "Pramukh Swami Maharaj", "Yogiji Maharaj", "Shastriji Maharaj"],
+    correct: 0,
+    explain: "Mahant Swami Maharaj is the sixth spiritual successor of Bhagwan Swaminarayan."
+  },
+  {
+    q: "What does 'Ekadashi' mainly involve?",
+    options: ["A big feast", "Building mandirs", "Fasting and prayer", "A pilgrimage"],
+    correct: 2,
+    explain: "Ekadashi is observed twice a month with fasting and extra devotion."
+  },
+  {
+    q: "What is a 'mandir'?",
+    options: ["A prayer book", "A type of aarti", "A festival", "A Hindu temple"],
+    correct: 3,
+    explain: "A mandir is a sacred place of worship where devotees gather for darshan and satsang."
+  },
+  {
+    q: "Which of these is a core value taught by Mahant Swami Maharaj?",
+    options: ["Kindness and humility", "Ego first", "Winning arguments", "Avoiding others"],
+    correct: 0,
+    explain: "Mahant Swami Maharaj consistently emphasizes kindness, humility, and selfless service."
+  },
+  {
+    q: "What does 'satsang' literally mean?",
+    options: ["A dance form", "Company of the truth", "A type of food", "A holiday"],
+    correct: 1,
+    explain: "Satsang comes from Sanskrit meaning 'company of truth' — gathering to grow spiritually together."
+  },
+  {
+    q: "What does 'darshan' mean when you visit a mandir?",
+    options: ["Singing a devotional song", "Offering food to guests", "Seeing the deity or Guru with devotion", "Walking around the mandir"],
+    correct: 2,
+    explain: "Darshan means seeing the divine with faith and reverence — a core part of every mandir visit."
+  }
+];
+
+// Auto-built question: always uses the location set in the Live Tracker above, so it never goes out of date.
+(function(){
+  const pool = ["Mumbai, India", "Chicago, USA", "Nairobi, Kenya", "Sydney, Australia", "Toronto, Canada"];
+  const wrong = pool.filter(p => p !== tracker.location).slice(0, 3);
+  quizQuestions.push({
+    q: "Where is Mahant Swami Maharaj currently on vicharan?",
+    options: [wrong[0], wrong[1], wrong[2], tracker.location],
+    correct: 3,
+    explain: `Swamishri is currently in ${tracker.location}. Check the Live Tracker for where he travels next!`
+  });
+})();
+
+/* ===================== END EDIT ZONE ===================== */
+
+
+// ---- Render tracker ----
+document.getElementById('currentLoc').textContent = tracker.location;
+document.getElementById('currentDateTime').textContent = tracker.localDateTime;
+document.getElementById('nextStop').textContent = tracker.nextStop;
+document.getElementById('funFact').textContent = tracker.funFact;
+
+// ---- Render header quote ----
+document.getElementById('headerQuoteText').textContent = headerQuote.text;
+document.getElementById('headerQuoteAuthor').textContent = headerQuote.author;
+
+// ---- Render events list ----
+const list = document.getElementById('eventsList');
+const MONTHS = {JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
+const etNow = new Date(new Date().toLocaleString('en-US', { timeZone: tracker.timeZone }));
+const todayStart = new Date(etNow.getFullYear(), etNow.getMonth(), etNow.getDate());
+events.forEach(ev => {
+  const evDate = new Date(2026, MONTHS[ev.month], ev.day);
+  if (evDate < todayStart) return;               // hide events that already passed
+  const isToday = evDate.getTime() === todayStart.getTime();
+  const row = document.createElement('div');
+  row.className = 'event-row';
+  row.innerHTML = `
+    <div class="event-badge"><div class="m">${ev.month}</div><div class="d">${ev.day}</div></div>
+    <div class="event-info">
+      <div class="name">${ev.name}${isToday ? ' <span style="color:var(--maroon);font-size:10px;font-weight:700;">· TODAY</span>' : ''}</div>
+      <div class="sub">${ev.sub}</div>
+    </div>
+    <div class="event-emoji">${ev.emoji}</div>
+  `;
+  list.appendChild(row);
+});
+
+// ---- Live clock (shows the time where Swamishri is — set tracker.timeZone above) ----
+function tzName(now){
+  if (tracker.timeZoneLabel) return tracker.timeZoneLabel;
+  const parts = new Intl.DateTimeFormat('en-GB', { timeZone: tracker.timeZone, timeZoneName:'short' }).formatToParts(now);
+  const p = parts.find(x => x.type === 'timeZoneName');
+  return p ? p.value : '';
+}
+function updateClock(){
+  const now = new Date();
+  const tz = tracker.timeZone;
+  const timeStr = now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', second:'2-digit', timeZone:tz });
+  const dateStr = now.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric', timeZone:tz });
+  const dayStr = now.toLocaleDateString('en-US', { weekday:'long', timeZone:tz });
+  document.getElementById('liveTime').textContent = `${timeStr} ${tzName(now)}`;
+  document.getElementById('liveDate').textContent = `${dateStr} · ${dayStr}`;
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ---- Satsang Quiz engine ----
+let quizIndex = 0;
+let quizScore = 0;
+let quizAnswered = false;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+let quizSet = [];
+
+function openQuiz(){
+  quizIndex = 0;
+  quizScore = 0;
+  quizSet = shuffle(quizQuestions);
+  document.getElementById('quizOverlay').classList.add('open');
+  document.getElementById('quizPlay').style.display = 'block';
+  document.getElementById('quizResults').classList.remove('show');
+  renderQuestion();
+}
+
+function closeQuiz(){
+  document.getElementById('quizOverlay').classList.remove('open');
+}
+
+function renderQuestion(){
+  quizAnswered = false;
+  const item = quizSet[quizIndex];
+  document.getElementById('quizProgress').style.width = `${(quizIndex / quizSet.length) * 100}%`;
+  document.getElementById('quizQuestion').textContent = `${quizIndex + 1}. ${item.q}`;
+  const optWrap = document.getElementById('quizOptions');
+  optWrap.innerHTML = '';
+  item.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i);
+    optWrap.appendChild(btn);
+  });
+  document.getElementById('quizExplain').classList.remove('show');
+  document.getElementById('quizNextBtn').classList.remove('show');
+}
+
+function selectAnswer(i){
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const item = quizSet[quizIndex];
+  const buttons = document.querySelectorAll('#quizOptions .quiz-opt');
+  buttons.forEach((b, idx) => {
+    b.disabled = true;
+    if (idx === item.correct) b.classList.add('correct');
+    else if (idx === i) b.classList.add('incorrect');
+  });
+  if (i === item.correct) quizScore++;
+  const explainBox = document.getElementById('quizExplain');
+  explainBox.textContent = `💡 ${item.explain}`;
+  explainBox.classList.add('show');
+  document.getElementById('quizNextBtn').classList.add('show');
+  document.getElementById('quizNextBtn').textContent = (quizIndex === quizSet.length - 1) ? 'See Results →' : 'Next →';
+}
+
+function nextQuestion(){
+  quizIndex++;
+  if (quizIndex >= quizSet.length){
+    showResults();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showResults(){
+  document.getElementById('quizProgress').style.width = '100%';
+  document.getElementById('quizPlay').style.display = 'none';
+  const results = document.getElementById('quizResults');
+  results.classList.add('show');
+  const total = quizSet.length;
+  document.getElementById('quizResultScore').textContent = `${quizScore} / ${total}`;
+  let emoji = '🌱', msg = 'Keep exploring satsang — you\'ll ace it next time!';
+  const pct = quizScore / total;
+  if (pct === 1){ emoji = '🏆'; msg = 'Perfect score! Truly a Nishta champion!'; }
+  else if (pct >= 0.7){ emoji = '🎉'; msg = 'Great job! You know your satsang well!'; }
+  else if (pct >= 0.4){ emoji = '🙂'; msg = 'Nice effort! A little more satsang and you\'ll master it.'; }
+  document.getElementById('quizResultEmoji').textContent = emoji;
+  document.getElementById('quizResultMsg').textContent = msg;
+}
+
+document.getElementById('quizOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'quizOverlay') closeQuiz();
+});
+</script>
+
+</body>
+</html>
