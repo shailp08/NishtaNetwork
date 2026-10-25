@@ -218,6 +218,7 @@
   .map-wrap .route{ position:absolute; inset:0; width:100%; height:100%; }
   .pin{ position:absolute; transform:translate(-50%,-50%); display:flex; align-items:center; }
   .pin .dot{ width:14px; height:14px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.35); flex-shrink:0; }
+  .pin-current{ z-index:2; }
   .pin-current .dot{ background:#8c2f2f; animation:pulse 2s infinite; }
   .pin-next .dot{ background:#d99a2b; }
   .pin-label{ position:absolute; white-space:nowrap; font-size:12px; font-weight:700; background:rgba(255,255,255,.92); border:1px solid var(--border); border-radius:10px; padding:1px 8px; }
@@ -379,8 +380,9 @@
     border:2px solid var(--border);
     border-radius:16px;
     padding:10px 18px;
-    display:grid;
-    grid-template-columns: 1fr;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
     align-items:center;
     gap:14px;
     font-size:12px;
@@ -392,7 +394,6 @@
     border:1.5px solid var(--border);
     border-radius:20px;
     padding:6px 8px 6px 16px;
-    justify-self:center;
   }
   .quiz-cta .qc-text{ text-align:right; }
   .quiz-cta .qc-title{ font-family:'Baloo 2', sans-serif; font-weight:700; color:var(--maroon-dark); font-size:12.5px; }
@@ -418,11 +419,91 @@
     .footer-bar{ grid-template-columns:1fr; text-align:center; }
     .quiz-cta{ justify-self:center; }
   }
+
+  /* ---------- BAL SABHA RULES VIEW (same page) ---------- */
+  #rulesView{ display:none; padding:20px; }
+  #rulesView .rv-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+  #rulesView .rv-brand{ display:flex; align-items:center; gap:10px; }
+  #rulesView .rv-lion{ font-size:34px; }
+  #rulesView .rv-name{ font-family:'Baloo 2', sans-serif; font-weight:800; color:var(--maroon-dark); font-size:20px; line-height:1; }
+  #rulesView .rv-back{
+    background:var(--maroon); color:#fff; border:none; cursor:pointer;
+    font-family:'Baloo 2', sans-serif; font-weight:700; font-size:13px;
+    padding:8px 16px; border-radius:16px; box-shadow:0 2px 0 var(--maroon-dark); white-space:nowrap;
+  }
+  #rulesView .rv-back:active{ transform:translateY(2px); box-shadow:none; }
+  #rulesView .rv-title{ font-family:'Baloo 2', sans-serif; font-weight:800; color:var(--maroon-dark); text-align:center; font-size:34px; letter-spacing:1px; margin:6px 0 4px; }
+  #rulesView .rv-sub{ text-align:center; color:var(--ink-soft); font-size:14px; margin-bottom:18px; }
+  #rulesView .rv-list{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  #rulesView .rv-rule{ display:flex; align-items:center; gap:14px; background:#fffaf0; border:2px solid var(--border); border-radius:16px; padding:12px 16px; box-shadow:0 3px 0 rgba(74,52,35,0.15); }
+  #rulesView .rv-num{ flex:0 0 auto; width:38px; height:38px; border-radius:50%; background:var(--maroon); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Baloo 2', sans-serif; font-weight:800; font-size:17px; box-shadow:0 2px 0 var(--maroon-dark); }
+  #rulesView .rv-txt{ font-size:16px; line-height:1.4; font-weight:500; }
+  #rulesView .rv-note{ margin-top:18px; text-align:center; font-family:'Baloo 2', sans-serif; font-weight:700; color:var(--maroon-dark); font-size:16px; }
+  @media (max-width:760px){
+    #rulesView .rv-list{ grid-template-columns:1fr; }
+    #rulesView .rv-title{ font-size:28px; }
+    #rulesView .rv-txt{ font-size:15px; }
+  }
+
+  /* ---------- POINTS VIEW (same page) ---------- */
+  #pointsView{ display:none; padding:20px; }
+  #pointsView .pv-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+  #pointsView .pv-brand{ display:flex; align-items:center; gap:10px; }
+  #pointsView .pv-lion{ font-size:34px; }
+  #pointsView .pv-name{ font-family:'Baloo 2', sans-serif; font-weight:800; color:var(--maroon-dark); font-size:20px; line-height:1; }
+  #pointsView .pv-back{ background:var(--maroon); color:#fff; border:none; cursor:pointer; font-family:'Baloo 2', sans-serif; font-weight:700; font-size:13px; padding:8px 16px; border-radius:16px; box-shadow:0 2px 0 var(--maroon-dark); white-space:nowrap; }
+  #pointsView .pv-back:active{ transform:translateY(2px); box-shadow:none; }
+  #pointsView .pv-title{ font-family:'Baloo 2', sans-serif; font-weight:800; color:var(--maroon-dark); text-align:center; font-size:34px; letter-spacing:1px; margin:6px 0 4px; }
+  #pointsView .pv-sub{ text-align:center; color:var(--ink-soft); font-size:14px; margin-bottom:16px; }
+  #pointsView .pv-tabs{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:16px; }
+  #pointsView .pv-tab{ background:#fffaf0; color:var(--maroon-dark); border:2px solid var(--border); border-radius:16px; cursor:pointer; font-family:'Baloo 2', sans-serif; font-weight:700; font-size:16px; padding:8px 22px; box-shadow:0 3px 0 rgba(74,52,35,0.15); }
+  #pointsView .pv-tab.active{ background:var(--maroon); color:#fff; border-color:var(--maroon-dark); box-shadow:0 3px 0 var(--maroon-dark); }
+  #pointsView .pv-total{ text-align:center; font-family:'Baloo 2', sans-serif; font-weight:700; color:var(--ink-soft); font-size:15px; margin-bottom:12px; }
+  #pointsView .pv-total b{ color:var(--maroon-dark); font-size:18px; }
+  #pointsView .pv-list{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  #pointsView .pv-kid{ display:flex; align-items:center; gap:10px; background:#fffaf0; border:2px solid var(--border); border-radius:16px; padding:10px 14px; box-shadow:0 3px 0 rgba(74,52,35,0.15); }
+  #pointsView .pv-kname{ flex:1; font-weight:600; font-size:15px; min-width:0; overflow-wrap:anywhere; }
+  #pointsView .pv-pts{ min-width:44px; text-align:center; font-family:'Baloo 2', sans-serif; font-weight:800; font-size:24px; color:var(--maroon-dark); }
+  #pointsView .pv-btn{ border:none; cursor:pointer; font-family:'Baloo 2', sans-serif; font-weight:800; font-size:16px; color:#fff; background:var(--teal); border-radius:12px; min-width:38px; height:38px; padding:0 8px; box-shadow:0 2px 0 rgba(0,0,0,0.25); }
+  #pointsView .pv-btn.minus{ background:#b04a3a; }
+  #pointsView .pv-amount{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin-bottom:14px; }
+  #pointsView .pv-amt-label{ font-family:'Baloo 2', sans-serif; font-weight:700; color:var(--ink-soft); font-size:14px; }
+  #pointsView .pv-chip{ background:#fffaf0; border:2px solid var(--border); color:var(--maroon-dark); border-radius:12px; cursor:pointer; font-family:'Baloo 2', sans-serif; font-weight:800; font-size:15px; min-width:38px; height:36px; }
+  #pointsView .pv-chip.active{ background:var(--maroon); color:#fff; border-color:var(--maroon-dark); }
+  #pointsView .pv-custom{ width:70px; height:36px; border:2px solid var(--border); border-radius:12px; text-align:center; font-family:'Baloo 2', sans-serif; font-weight:700; font-size:14px; background:#fffaf0; color:var(--ink); }
+  #pointsView .pv-btn:active{ transform:translateY(2px); box-shadow:none; }
+  #pointsView .pv-actions{ margin-top:18px; text-align:center; }
+  #pointsView .pv-reset{ background:transparent; border:2px solid var(--border); color:var(--ink-soft); border-radius:14px; cursor:pointer; font-family:'Baloo 2', sans-serif; font-weight:700; font-size:13px; padding:6px 16px; }
+  #pointsView .pv-note{ margin-top:8px; text-align:center; color:var(--ink-soft); font-size:11.5px; }
+  @media (max-width:760px){
+    #pointsView .pv-list{ grid-template-columns:1fr; }
+    #pointsView .pv-title{ font-size:28px; }
+  }
+
+  /* ---------- QUIZ PICKER (group + level) ---------- */
+  .qp-title{ font-family:'Baloo 2', sans-serif; font-weight:700; color:var(--maroon-dark); font-size:17px; margin:10px 0 10px; text-align:center; }
+  .qp-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .qp-grid.levels{ grid-template-columns:1fr; }
+  .qp-btn{
+    background:#fffaf0; border:2px solid var(--border); border-radius:14px; cursor:pointer;
+    padding:12px 14px; text-align:left; font-family:'Poppins', sans-serif; color:var(--ink);
+    box-shadow:0 3px 0 rgba(74,52,35,0.15);
+  }
+  .qp-btn:hover{ background:#fff3d6; }
+  .qp-btn:active{ transform:translateY(2px); box-shadow:none; }
+  .qp-btn .qp-name{ font-family:'Baloo 2', sans-serif; font-weight:800; font-size:18px; color:var(--maroon-dark); }
+  .qp-btn .qp-desc{ font-size:12px; color:var(--ink-soft); }
+  .qp-btn .qp-best{ font-size:11.5px; color:var(--olive); font-weight:600; margin-top:2px; }
+  .qp-back{ background:none; border:none; cursor:pointer; color:var(--ink-soft); font-family:'Baloo 2', sans-serif; font-weight:700; font-size:13px; padding:4px 0; }
+  .qp-crumb{ font-size:12px; font-weight:600; color:var(--ink-soft); margin:2px 0 8px; }
+  .qr-actions{ display:flex; flex-direction:column; gap:8px; align-items:center; margin-top:10px; }
+  .qr-actions .quiz-retry{ margin-top:0; }
+  .qr-actions .qr-alt{ background:#fffaf0; color:var(--maroon-dark); border:2px solid var(--border); box-shadow:none; }
 </style>
 </head>
 <body>
 
-<div class="tv">
+<div class="tv" id="dashView">
 
   <!-- ============ HEADER ============ -->
   <header>
@@ -446,7 +527,6 @@
     <div class="header-side">
       <div class="photo-panel"><img src="images/mahant-swami.jpg" alt="Mahant Swami Maharaj"></div>
       <div class="clockbox">
-        <div class="cicon">🕐</div>
         <div>
           <div class="time" id="liveTime">--:--</div>
           <div class="date" id="liveDate">Loading...</div>
@@ -462,7 +542,6 @@
     <div class="card col-events">
       <div class="card-title">🗓️ Upcoming Events</div>
       <div class="events-list" id="eventsList"></div>
-      <div class="more-link">More updates coming soon...</div>
     </div>
 
     <!-- SWAMISHRI LIVE TRACKER -->
@@ -471,10 +550,10 @@
       <div class="map-wrap">
         <img class="world-map" src="images/world-map.jpg" alt="World map">
         <svg class="route" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <path d="M48.9,31.8 Q60,32 69.4,50" fill="none" stroke="#8c2f2f" stroke-width="2.5" stroke-dasharray="6,5" vector-effect="non-scaling-stroke"/>
+          <path id="routePath" d="" fill="none" stroke="#8c2f2f" stroke-width="2.5" stroke-dasharray="6,5" vector-effect="non-scaling-stroke"/>
         </svg>
-        <div class="pin pin-current" style="left:48.9%; top:31.8%;"><span class="dot"></span><span class="pin-label">London</span></div>
-        <div class="pin pin-next" style="left:69.4%; top:50%;"><span class="dot"></span><span class="pin-label">Ahmedabad</span></div>
+        <div class="pin pin-next" id="pinNext"><span class="dot"></span><span class="pin-label" id="pinNextLabel"></span></div>
+        <div class="pin pin-current" id="pinCurrent"><span class="dot"></span><span class="pin-label" id="pinCurrentLabel"></span></div>
       </div>
       <div class="tracker-info">
         <div class="loc">📌 <span id="currentLoc">London, UK</span></div>
@@ -495,6 +574,20 @@
       </div>
       <button class="qc-btn" onclick="openQuiz()">PLAY</button>
     </div>
+    <div class="quiz-cta rules-cta">
+      <div class="qc-text">
+        <div class="qc-title">📜 Bal Sabha Rules</div>
+        <div class="qc-sub">Read the rules</div>
+      </div>
+      <button class="qc-btn" onclick="showRules()">VIEW</button>
+    </div>
+    <div class="quiz-cta rules-cta">
+      <div class="qc-text">
+        <div class="qc-title">⭐ Points</div>
+        <div class="qc-sub">Group scores</div>
+      </div>
+      <button class="qc-btn" onclick="showPoints()">OPEN</button>
+    </div>
   </div>
 
   <!-- ============ SATSANG QUIZ MODAL ============ -->
@@ -504,7 +597,20 @@
       <div class="quiz-header">🎲 Satsang Quiz</div>
       <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgress"></div></div>
 
-      <div id="quizPlay">
+      <div class="qp-crumb" id="quizCrumb"></div>
+
+      <div id="quizPickGroup">
+        <div class="qp-title">Choose your group</div>
+        <div class="qp-grid" id="qpGroups"></div>
+      </div>
+
+      <div id="quizPickLevel" style="display:none">
+        <button class="qp-back" onclick="showGroupPicker()">← Back to groups</button>
+        <div class="qp-title" id="qpLevelTitle"></div>
+        <div class="qp-grid levels" id="qpLevels"></div>
+      </div>
+
+      <div id="quizPlay" style="display:none">
         <div class="quiz-question" id="quizQuestion"></div>
         <div class="quiz-options" id="quizOptions"></div>
         <div class="quiz-explain" id="quizExplain"></div>
@@ -515,7 +621,11 @@
         <div class="emoji" id="quizResultEmoji">🏆</div>
         <div class="score" id="quizResultScore"></div>
         <div class="msg" id="quizResultMsg"></div>
-        <button class="quiz-retry" onclick="openQuiz()">Play Again</button>
+        <div class="qr-actions">
+          <button class="quiz-retry" onclick="startQuiz(quizGroup, quizLevel)">Play Again</button>
+          <button class="quiz-retry" id="qrNext" onclick="startQuiz(quizGroup, quizLevel + 1)">Next Level →</button>
+          <button class="quiz-retry qr-alt" onclick="openQuiz()">Choose Another Quiz</button>
+        </div>
       </div>
     </div>
   </div>
@@ -529,14 +639,85 @@
    ===================================================================== */
 
 // ---- Swamishri Live Tracker ----
+// Source: official BAPS vicharan schedule (baps.org/vicharan). The schedule is subject to change.
+// The tracker works out WHERE Swamishri is from today's date, so it updates by itself.
+// To add new stops, add a line to the bottom of the `vicharan` list below:
+//   start / end = YYYY-MM-DD, lat / lon = where the pin goes on the map.
 const tracker = {
-  location: "London, UK",
-  timeZone: "Europe/London",   // clock follows where Swamishri is (e.g. "Asia/Kolkata" for India)
-  timeZoneLabel: "",           // optional text shown after the time, e.g. "UK". Leave "" to auto-show BST/GMT/IST etc.
-  localDateTime: "Oct 11 · Today: Kishore-Kishori Din & Abhar Din · London vicharan ends Oct 13",
-  nextStop: "Ahmedabad (Oct 13–20) → Morbi (Oct 20 – Nov 4)",
-  funFact: "In Morbi, Swamishri will take part in the Vishvashanti Mahayagna, Murti-Pratishtha and Mandir Lokarpan on Oct 23–25. Then Gondal (Nov 4–14) and Tithal (Nov 14–30)."
+  timeZone: "America/New_York", // clock time zone (Eastern). Other examples: "Europe/London", "Asia/Kolkata"
+  timeZoneLabel: "",           // optional text shown after the time. Leave "" to auto-show EDT/EST/BST etc.
+  // The fields below are filled in automatically from the schedule:
+  location: "", localDateTime: "", nextStop: "", funFact: "", cur: null, next: null
 };
+
+const vicharan = [
+  { name:"London, UK",       short:"London",    start:"2026-09-16", end:"2026-10-13", lat:51.5074, lon:-0.1278,
+    fact:"Swamishri's London vicharan has special days for every group, like Shishu Din, Balika Din, Yuva Din, Mahila Din and Kishore-Kishori Din." },
+  { name:"Ahmedabad, India", short:"Ahmedabad", start:"2026-10-13", end:"2026-10-20", lat:23.0225, lon:72.5714,
+    fact:"Swamishri arrives in Ahmedabad on Oct 13 for a Swagat Sabha on Oct 18, then heads to Morbi on Oct 20." },
+  { name:"Morbi, India",     short:"Morbi",     start:"2026-10-20", end:"2026-11-04", lat:22.8173, lon:70.8378,
+    fact:"In Morbi, Swamishri will take part in the Vishvashanti Mahayagna (Oct 23-24), then the Murti-Pratishtha and Mandir Lokarpan on Oct 25." },
+  { name:"Gondal, India",    short:"Gondal",    start:"2026-11-04", end:"2026-11-14", lat:21.9619, lon:70.7923,
+    fact:"In Gondal, Swamishri will be present for Lakshmi Pujan (Nov 6), Bal Din (Nov 7) and Diwali Chopda Pujan (Nov 8)." },
+  { name:"Tithal, India",    short:"Tithal",    start:"2026-11-14", end:"2026-11-30", lat:20.5877, lon:72.9094,
+    fact:"Swamishri will be in Tithal from Nov 14 to Nov 30. The schedule after that has not been announced yet." }
+];
+
+// Special programs on certain days (shown as "Today: ..." in the tracker)
+const vicharanNotes = {
+  "2026-10-13":"Arrives in Ahmedabad",
+  "2026-10-18":"Swagat Sabha",
+  "2026-10-20":"Swagat in Morbi",
+  "2026-10-23":"Vishvashanti Mahayagna · Swagat Samaroh",
+  "2026-10-24":"Vishvashanti Mahayagna · Nagar Yatra",
+  "2026-10-25":"Murti-Pratishtha · Mandir Lokarpan · Sharad Purnima Sabha",
+  "2026-10-28":"Puja Darshan · Evening Sabha",
+  "2026-10-29":"Puja Darshan · Evening Sabha",
+  "2026-10-30":"Puja Darshan · Evening Sabha",
+  "2026-10-31":"Puja Darshan · Evening Sabha",
+  "2026-11-01":"Puja Darshan · Evening Sabha",
+  "2026-11-02":"Puja Darshan · Evening Sabha",
+  "2026-11-04":"Viday from Morbi · Aagman in Gondal",
+  "2026-11-06":"Swagat Din · Lakshmi Pujan",
+  "2026-11-07":"Hanuman Pujan · Bal Din",
+  "2026-11-08":"Chopda Pujan",
+  "2026-11-11":"Puja Darshan · Yuva Din",
+  "2026-11-12":"Puja Darshan · Gramya Din",
+  "2026-11-14":"Viday from Gondal"
+};
+const NO_SCHEDULE_NOTE = "Swamishri's schedule after Nov 30 has not been announced yet. Check baps.org/vicharan for updates.";
+
+// ---- date helpers ----
+const MON_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function isoToday(){ return new Date().toLocaleDateString('en-CA', { timeZone: tracker.timeZone }); }   // YYYY-MM-DD
+function fmtDay(iso){ const p = iso.split('-'); return MON_NAMES[+p[1] - 1] + ' ' + (+p[2]); }
+function fmtRange(a, b){
+  const pa = a.split('-'), pb = b.split('-');
+  return pa[1] === pb[1] ? `${fmtDay(a)}–${+pb[2]}` : `${fmtDay(a)} – ${fmtDay(b)}`;
+}
+
+// ---- work out where Swamishri is today ----
+function computeTracker(){
+  const today = isoToday();
+  let i = 0;
+  vicharan.forEach((s, idx) => { if (s.start <= today) i = idx; });
+  const cur = vicharan[i];
+  const next = vicharan[i + 1] || null;
+  const next2 = vicharan[i + 2] || null;
+  const ended = today > vicharan[vicharan.length - 1].end;
+  const note = vicharanNotes[today];
+  tracker.cur = cur;
+  tracker.next = next;
+  tracker.location = cur.name;
+  tracker.localDateTime = ended
+    ? `Last announced stop: ${cur.short} (${fmtRange(cur.start, cur.end)})`
+    : `${note ? 'Today: ' + note + ' · ' : ''}${cur.short} vicharan · ${fmtRange(cur.start, cur.end)}`;
+  tracker.nextStop = next
+    ? `${next.short} (${fmtRange(next.start, next.end)})` + (next2 ? ` → ${next2.short} (${fmtRange(next2.start, next2.end)})` : '')
+    : 'To be announced. Check baps.org/vicharan';
+  tracker.funFact = ended ? NO_SCHEDULE_NOTE : cur.fact;
+}
+computeTracker();
 
 // ---- Header quote (top banner) ----
 const headerQuote = {
@@ -544,110 +725,282 @@ const headerQuote = {
   author: "— Mahant Swami Maharaj"
 };
 
-// ---- Upcoming Events (BAPS calendar, verified via baps.org) ----
-// month: 3-letter abbreviation, day: number, name, sub: weekday/time, emoji: icon
+// ---- Upcoming Events ----
+// Source: BAPS annual festival calendar (baps.org/Calendar) + Swamishri's vicharan schedule.
+// date = YYYY-MM-DD. The page shows only the next 5 upcoming events. When one passes, it disappears
+// and the next one slides in. To add an event, just add a line (any order is fine).
+const MAX_EVENTS = 5;
 const events = [
-  { month:"OCT", day:11, name:"Navratri Begins",                      sub:"Sunday · 9 Nights of Devotion",                 emoji:"🪔" },
-  { month:"OCT", day:20, name:"Vijaya Dashmi",                        sub:"Tuesday · Swamishri arrives in Morbi",          emoji:"🏹" },
-  { month:"OCT", day:25, name:"Gunatitanand Swami Janma Jayanti",     sub:"Sunday · Morbi Mandir Lokarpan & Sharad Purnima", emoji:"🌕" },
-  { month:"NOV", day:8,  name:"Diwali",                               sub:"Sunday · Festival of Lights",                   emoji:"🎆" },
-  { month:"NOV", day:10, name:"Annakut & Bestu Varas",                sub:"Tuesday · Hindu New Year",                      emoji:"🍛" }
+  // ---- Swamishri's vicharan + festivals, fall 2026 ----
+  { date:"2026-10-13", name:"Swamishri Arrives in Ahmedabad",   sub:"Ahmedabad vicharan (Oct 13–20)",              emoji:"✈️" },
+  { date:"2026-10-18", name:"Swagat Sabha, Ahmedabad",          sub:"Welcome assembly for Swamishri",              emoji:"🎉" },
+  { date:"2026-10-20", name:"Vijaya Dashmi",                    sub:"Swamishri arrives in Morbi",                  emoji:"🏹" },
+  { date:"2026-10-23", name:"Vishvashanti Mahayagna",           sub:"Morbi · Oct 23–24",                           emoji:"🔥" },
+  { date:"2026-10-24", name:"Nagar Yatra, Morbi",               sub:"Evening procession through the city",         emoji:"🎊" },
+  { date:"2026-10-25", name:"Gunatitanand Swami Janma Jayanti", sub:"Morbi Mandir Lokarpan & Sharad Purnima",      emoji:"🌕" },
+  { date:"2026-11-04", name:"Swamishri Arrives in Gondal",      sub:"Gondal vicharan (Nov 4–14)",                  emoji:"✈️" },
+  { date:"2026-11-05", name:"Vagh Baras",                       sub:"Cows are worshipped",                         emoji:"🐄" },
+  { date:"2026-11-06", name:"Dhan Teras / Lakshmi Pujan",       sub:"Worship of wealth · Gondal",                  emoji:"🪙" },
+  { date:"2026-11-07", name:"Kali Chaudash",                    sub:"Prayers for protection · Bal Din in Gondal",  emoji:"🛡️" },
+  { date:"2026-11-08", name:"Diwali",                           sub:"Festival of Lights · Chopda Pujan in Gondal", emoji:"🎆" },
+  { date:"2026-11-10", name:"Annakut & Bestu Varas",            sub:"Hindu New Year",                              emoji:"🍛" },
+  { date:"2026-11-11", name:"Bhai Beej",                        sub:"Brothers dine at their sister's home",        emoji:"🧡" },
+  { date:"2026-11-14", name:"Swamishri Arrives in Tithal",      sub:"Tithal vicharan (Nov 14–30)",                 emoji:"✈️" },
+  { date:"2026-11-21", name:"Prabodhini Ekadashi",              sub:"Last day of Chaturmas",                       emoji:"🙏" },
+  { date:"2026-11-24", name:"Dev Diwali",                       sub:"God's return after Chaturmas",                emoji:"🪔" },
+  { date:"2026-11-30", name:"Tithal Vicharan Ends",             sub:"Next schedule not yet announced",             emoji:"📍" },
+  { date:"2026-12-17", name:"Pramukh Swami Maharaj Jayanti",    sub:"Birthday of the 5th spiritual successor",     emoji:"🎂" },
+
+  // ---- 2027 ----
+  { date:"2027-01-14", name:"Makar Sankranti (Uttarayan)",      sub:"A day for charity and giving",                emoji:"🪁" },
+  { date:"2027-01-22", name:"Gunatitanand Swami Diksha Day",    sub:"Day he was initiated as a sadhu",             emoji:"🙏" },
+  { date:"2027-02-02", name:"Mahant Swami Maharaj Janma Jayanti Celebration", sub:"Symbolic birthday celebration", emoji:"🎂" },
+  { date:"2027-02-11", name:"Vasant Panchami",                  sub:"Shikshapatri day & Shastriji Maharaj's birthday", emoji:"🌼" },
+  { date:"2027-03-06", name:"Shivratri",                        sub:"Night of prayer to Lord Shiv",                emoji:"🔱" },
+  { date:"2027-03-21", name:"Holi",                             sub:"Birthday of Bhagatji Maharaj",                emoji:"🎨" },
+  { date:"2027-03-22", name:"Pushpadolotsav",                   sub:"Celebrates the protection of Prahlad",        emoji:"🌸" },
+  { date:"2027-04-15", name:"Ram Navmi & Hari Navmi",           sub:"Birthdays of Bhagwan Ram & Bhagwan Swaminarayan", emoji:"🎂" },
+  { date:"2027-04-20", name:"Hanuman Jayanti",                  sub:"Birthday of Hanumanji",                       emoji:"🙏" },
+  { date:"2027-05-18", name:"Nrusinh Jayanti",                  sub:"Birthday of Lord Nrusinh",                    emoji:"🦁" },
+  { date:"2027-05-20", name:"Buddha Jayanti",                   sub:"Birthday of Lord Buddha",                     emoji:"🪷" },
+  { date:"2027-06-02", name:"Yogi Jayanti",                     sub:"Birthday of Yogiji Maharaj",                  emoji:"🎂" },
+  { date:"2027-06-08", name:"Pramukh Varni Din",                sub:"Pramukh Swami Maharaj appointed BAPS president", emoji:"🏅" },
+  { date:"2027-07-05", name:"Rathyatra",                        sub:"Murtis paraded in decorated chariots",        emoji:"🛕" },
+  { date:"2027-07-14", name:"Devpodhi Ekadashi",                sub:"First day of Chaturmas",                      emoji:"🙏" },
+  { date:"2027-07-18", name:"Guru Purnima",                     sub:"A day to honor the Guru",                     emoji:"🌕" },
+  { date:"2027-08-17", name:"Raksha Bandhan",                   sub:"Celebrating the bond of brothers & sisters",  emoji:"🎀" },
+  { date:"2027-08-25", name:"Janmashtami",                      sub:"Birthday of Bhagwan Krishna",                 emoji:"🦚" },
+  { date:"2027-09-03", name:"Sam Shravani",                     sub:"Sacred thread (janoi) is changed",            emoji:"🧵" },
+  { date:"2027-09-04", name:"Ganesh Chaturthi",                 sub:"Birthday of Lord Ganesh",                     emoji:"🐘" },
+  { date:"2027-09-11", name:"Jal Jhilani Ekadashi",             sub:"The Lord goes on a boat ride",                emoji:"⛵" },
+  { date:"2027-09-12", name:"Vaman Jayanti",                    sub:"Birthday of Bhagwan Vaman",                   emoji:"🌟" },
+  { date:"2027-09-24", name:"Mahant Swami Maharaj Janma Jayanti", sub:"Birthday of Mahant Swami Maharaj",          emoji:"🎂" },
+  { date:"2027-09-30", name:"Navratri Begins",                  sub:"9 Nights of Devotion",                        emoji:"🪔" },
+  { date:"2027-10-09", name:"Vijaya Dashmi",                    sub:"Victory of good over evil",                   emoji:"🏹" },
+  { date:"2027-10-14", name:"Gunatitanand Swami Janma Jayanti", sub:"Sharad Purnima",                              emoji:"🌕" },
+  { date:"2027-10-26", name:"Vagh Baras",                       sub:"Cows are worshipped",                         emoji:"🐄" },
+  { date:"2027-10-27", name:"Dhan Teras / Lakshmi Pujan",       sub:"Worship of wealth",                           emoji:"🪙" },
+  { date:"2027-10-28", name:"Kali Chaudash",                    sub:"Prayers for protection",                      emoji:"🛡️" },
+  { date:"2027-10-29", name:"Diwali",                           sub:"Festival of Lights",                          emoji:"🎆" },
+  { date:"2027-10-30", name:"Annakut & Bestu Varas",            sub:"Hindu New Year",                              emoji:"🍛" },
+  { date:"2027-10-31", name:"Bhai Beej",                        sub:"Brothers dine at their sister's home",        emoji:"🧡" },
+  { date:"2027-11-10", name:"Prabodhini Ekadashi",              sub:"Last day of Chaturmas",                       emoji:"🙏" },
+  { date:"2027-11-14", name:"Dev Diwali",                       sub:"God's return after Chaturmas",                emoji:"🪔" },
+  { date:"2027-12-06", name:"Pramukh Swami Maharaj Jayanti",    sub:"Birthday of the 5th spiritual successor",     emoji:"🎂" }
 ];
 
 // ---- Satsang Quiz questions ----
-// options: array of 4 strings, correct: index (0-3) of the right answer, explain: short fun fact shown after answering
-const quizQuestions = [
-  {
-    q: "Who is the current Guru of BAPS Swaminarayan Sanstha?",
-    options: ["Mahant Swami Maharaj", "Pramukh Swami Maharaj", "Yogiji Maharaj", "Shastriji Maharaj"],
-    correct: 0,
-    explain: "Mahant Swami Maharaj is the sixth spiritual successor of Bhagwan Swaminarayan."
-  },
-  {
-    q: "What does 'Ekadashi' mainly involve?",
-    options: ["A big feast", "Building mandirs", "Fasting and prayer", "A pilgrimage"],
-    correct: 2,
-    explain: "Ekadashi is observed twice a month with fasting and extra devotion."
-  },
-  {
-    q: "What is a 'mandir'?",
-    options: ["A prayer book", "A type of aarti", "A festival", "A Hindu temple"],
-    correct: 3,
-    explain: "A mandir is a sacred place of worship where devotees gather for darshan and satsang."
-  },
-  {
-    q: "Which of these is a core value taught by Mahant Swami Maharaj?",
-    options: ["Kindness and humility", "Ego first", "Winning arguments", "Avoiding others"],
-    correct: 0,
-    explain: "Mahant Swami Maharaj consistently emphasizes kindness, humility, and selfless service."
-  },
-  {
-    q: "What does 'satsang' literally mean?",
-    options: ["A dance form", "Company of the truth", "A type of food", "A holiday"],
-    correct: 1,
-    explain: "Satsang comes from Sanskrit meaning 'company of truth' — gathering to grow spiritually together."
-  },
-  {
-    q: "What does 'darshan' mean when you visit a mandir?",
-    options: ["Singing a devotional song", "Offering food to guests", "Seeing the deity or Guru with devotion", "Walking around the mandir"],
-    correct: 2,
-    explain: "Darshan means seeing the divine with faith and reverence — a core part of every mandir visit."
-  }
-];
-
-// Auto-built question: always uses the location set in the Live Tracker above, so it never goes out of date.
-(function(){
+// Each group has 3 levels (quizzes) of 5 questions. Level 1 = easiest, Level 3 = hardest.
+// Groups get harder from Group 0 (easiest) to Group 3 (hardest).
+// options: array of 4 strings, correct: index (0-3) of the right answer, explain: fun fact shown after answering
+function makeLocationQuestion(){
   const pool = ["Mumbai, India", "Chicago, USA", "Nairobi, Kenya", "Sydney, Australia", "Toronto, Canada"];
   const wrong = pool.filter(p => p !== tracker.location).slice(0, 3);
-  quizQuestions.push({
+  return {
     q: "Where is Mahant Swami Maharaj currently on vicharan?",
-    options: [wrong[0], wrong[1], wrong[2], tracker.location],
-    correct: 3,
+    options: [wrong[0], wrong[1], tracker.location, wrong[2]],
+    correct: 2,
     explain: `Swamishri is currently in ${tracker.location}. Check the Live Tracker for where he travels next!`
-  });
-})();
+  };
+}
+const quizBank = {
+  "Group 0": [
+    [
+      {"q": "What do we say to greet each other in satsang?", "options": ["Good morning", "See you later", "Jai Swaminarayan", "Happy birthday"], "correct": 2, "explain": "Jai Swaminarayan is how we greet each other with love and respect."},
+      {"q": "What is a mandir?", "options": ["A place where we pray to God", "A grocery store", "A video game arcade", "A swimming pool"], "correct": 0, "explain": "A mandir is a holy place where we do darshan, pray, and learn about God."},
+      {"q": "Who do we pray to in the mandir?", "options": ["A school teacher", "A famous singer", "A pilot", "Bhagwan Swaminarayan"], "correct": 3, "explain": "Bhagwan Swaminarayan is God, and we pray to him with love."},
+      {"q": "What do we do before we eat our food?", "options": ["Throw it in the air", "Offer it to God and say a prayer", "Run around the table", "Hide it"], "correct": 1, "explain": "We offer our food to God first, and then it becomes prasad."},
+      {"q": "How should we behave in the mandir?", "options": ["Run around", "Shout loudly", "Play games", "Sit quietly and show respect"], "correct": 3, "explain": "The mandir is a sacred place, so we stay calm and respectful."}
+    ],
+    [
+      {"q": "Who is the current Guru of BAPS Swaminarayan Sanstha?", "options": ["Mahant Swami Maharaj", "Pramukh Swami Maharaj", "Yogiji Maharaj", "Shastriji Maharaj"], "correct": 0, "explain": "Mahant Swami Maharaj is the sixth spiritual successor of Bhagwan Swaminarayan."},
+      makeLocationQuestion(),
+      {"q": "What do we do during aarti?", "options": ["Take a nap", "Eat snacks", "Sing and offer lamps to God", "Play on a phone"], "correct": 2, "explain": "Aarti is a special prayer where we sing and wave lit lamps (divas) to God with love."},
+      {"q": "What is prasad?", "options": ["A kind of toy", "A mandir door", "A song we sing", "Food offered to God that we then eat"], "correct": 3, "explain": "Prasad is blessed food that has first been offered to God."},
+      {"q": "Which one is a good thing to do at Bal Sabha?", "options": ["Listen to the speaker", "Talk while someone presents", "Run around the room", "Use your phone"], "correct": 0, "explain": "Listening carefully shows respect. It's one of our Bal Sabha rules!"}
+    ],
+    [
+      {"q": "What does 'satsang' mean?", "options": ["A dance party", "A type of food", "Good company, gathering to grow closer to God", "A holiday"], "correct": 2, "explain": "Satsang means keeping good company and learning about God together."},
+      {"q": "What is a good thing to do every morning?", "options": ["Argue with your family", "Say a prayer and do puja", "Skip all your chores", "Watch TV all day"], "correct": 1, "explain": "Starting the day with prayer helps us feel calm and close to God."},
+      {"q": "What was Bhagwan Swaminarayan called when he was a child?", "options": ["Ramesh", "Dinesh", "Mahesh", "Ghanshyam"], "correct": 3, "explain": "Bhagwan Swaminarayan was lovingly called Ghanshyam when he was little."},
+      {"q": "On which festival do we offer a huge 'mountain' of food to God?", "options": ["Raksha Bandhan", "Holi", "Annakut", "Guru Purnima"], "correct": 2, "explain": "Annakut means 'mountain of food' and is celebrated after Diwali."},
+      {"q": "Which of these is a good value that satsang teaches?", "options": ["Kindness and humility", "Ego first", "Winning arguments", "Avoiding others"], "correct": 0, "explain": "Mahant Swami Maharaj consistently emphasizes kindness, humility, and selfless service."}
+    ]
+  ],
+  "Group 1": [
+    [
+      {"q": "In which state of India was Bhagwan Swaminarayan born, in the village of Chhapaiya?", "options": ["Gujarat", "Maharashtra", "Rajasthan", "Uttar Pradesh"], "correct": 3, "explain": "He was born in Chhapaiya, near Ayodhya in Uttar Pradesh, in 1781."},
+      {"q": "Who were the parents of Bhagwan Swaminarayan?", "options": ["Dasharath and Kaushalya", "Dharmadev and Bhaktimata", "Vasudev and Devaki", "Shiva and Parvati"], "correct": 1, "explain": "His parents were Dharmadev and Bhaktimata, a very devout couple."},
+      {"q": "What does 'darshan' mean when you visit a mandir?", "options": ["Singing a devotional song", "Offering food to guests", "Walking around the mandir", "Seeing the deity or Guru with devotion"], "correct": 3, "explain": "Darshan means seeing the divine with faith and reverence, a core part of every mandir visit."},
+      {"q": "What does 'Ekadashi' mainly involve?", "options": ["Fasting and prayer", "A big feast", "Building mandirs", "A pilgrimage"], "correct": 0, "explain": "Ekadashi is observed twice a month with fasting and extra devotion."},
+      {"q": "What is 'pradakshina'?", "options": ["A type of food offering", "A song sung at Holi", "Walking around the murti or mandir with devotion", "Sitting silently in a corner"], "correct": 2, "explain": "Pradakshina is circling the murti or mandir to show devotion and respect."}
+    ],
+    [
+      {"q": "How many years did Nilkanth Varni travel across India as a young yogi?", "options": ["3 years", "12 years", "20 years", "7 years"], "correct": 3, "explain": "Starting at age 11, he traveled thousands of kilometers on foot over seven years."},
+      {"q": "At what age did Bhagwan Swaminarayan leave home to become a yogi?", "options": ["11", "5", "8", "16"], "correct": 0, "explain": "He left home at age 11 and became known as Nilkanth Varni."},
+      {"q": "What name was he known by as a young yogi?", "options": ["Ghanshyam Maharaj", "Sahajanand Swami", "Nilkanth Varni", "Narayan Muni"], "correct": 2, "explain": "As he traveled across India, he was known as Nilkanth Varni."},
+      {"q": "Who was the fifth spiritual successor (Guru) in the BAPS lineage?", "options": ["Yogiji Maharaj", "Pramukh Swami Maharaj", "Mahant Swami Maharaj", "Shastriji Maharaj"], "correct": 1, "explain": "Pramukh Swami Maharaj was the fifth Guru and inspired over 1,000 mandirs."},
+      {"q": "In which city is the BAPS Swaminarayan Akshardham that opened in 2005?", "options": ["Mumbai", "Chennai", "Kolkata", "New Delhi"], "correct": 3, "explain": "Swaminarayan Akshardham in New Delhi opened in 2005 and is visited by millions."}
+    ],
+    [
+      {"q": "Who was the first spiritual successor of Bhagwan Swaminarayan?", "options": ["Bhagatji Maharaj", "Shastriji Maharaj", "Gunatitanand Swami", "Yogiji Maharaj"], "correct": 2, "explain": "Gunatitanand Swami was the first in the line of Gurus."},
+      {"q": "Who founded BAPS in 1907?", "options": ["Shastriji Maharaj", "Yogiji Maharaj", "Pramukh Swami Maharaj", "Mahant Swami Maharaj"], "correct": 0, "explain": "Shastriji Maharaj founded BAPS in 1907."},
+      {"q": "The Robbinsville Akshardham, one of the largest Hindu temples outside India, is in which U.S. state?", "options": ["Texas", "California", "Florida", "New Jersey"], "correct": 3, "explain": "It opened in 2023 in Robbinsville, New Jersey."},
+      {"q": "In which city did BAPS open a traditional stone mandir in February 2024?", "options": ["Dubai", "Abu Dhabi", "Doha", "Muscat"], "correct": 1, "explain": "The BAPS Hindu Mandir in Abu Dhabi is a traditional stone mandir in the UAE's capital."},
+      {"q": "What does 'satsang' literally mean?", "options": ["A dance form", "A type of food", "A holiday", "Company of the truth"], "correct": 3, "explain": "Satsang comes from Sanskrit meaning 'company of truth', gathering to grow spiritually together."}
+    ]
+  ],
+  "Group 2": [
+    [
+      {"q": "Who was the fourth spiritual successor (Guru) in the BAPS lineage?", "options": ["Yogiji Maharaj", "Bhagatji Maharaj", "Pramukh Swami Maharaj", "Shastriji Maharaj"], "correct": 0, "explain": "The order: Gunatitanand Swami, Bhagatji Maharaj, Shastriji Maharaj, Yogiji Maharaj, Pramukh Swami Maharaj, Mahant Swami Maharaj."},
+      {"q": "How many verses does the Shikshapatri have?", "options": ["108", "273", "212", "500"], "correct": 2, "explain": "Bhagwan Swaminarayan wrote the Shikshapatri's 212 verses as guidelines for daily life."},
+      {"q": "How many discourses are in the Vachanamrut?", "options": ["212", "108", "365", "273"], "correct": 3, "explain": "The Vachanamrut records 273 spiritual discourses of Bhagwan Swaminarayan."},
+      {"q": "What does 'Vachanamrut' mean?", "options": ["Nectar in the form of words", "Song of the Guru", "Lamp of faith", "Path of the mountain"], "correct": 0, "explain": "'Vachan' means words and 'amrut' means nectar."},
+      {"q": "Which Guru inspired over 1,000 mandirs around the world and was known for his humility?", "options": ["Yogiji Maharaj", "Shastriji Maharaj", "Pramukh Swami Maharaj", "Gunatitanand Swami"], "correct": 2, "explain": "Pramukh Swami Maharaj's humble service inspired mandirs on every continent."}
+    ],
+    [
+      {"q": "In which town was the Shikshapatri written in 1826?", "options": ["Gadhada", "Vadtal", "Junagadh", "Bhuj"], "correct": 1, "explain": "Bhagwan Swaminarayan wrote the Shikshapatri in Vadtal in 1826."},
+      {"q": "Which was the first mandir built by Bhagwan Swaminarayan?", "options": ["Bhuj", "Vadtal", "Gadhada", "Ahmedabad"], "correct": 3, "explain": "The Ahmedabad mandir was the first, built in 1822."},
+      {"q": "Who gave diksha (initiation) to Bhagwan Swaminarayan?", "options": ["Muktanand Swami", "Gopalanand Swami", "Ramanand Swami", "Gunatitanand Swami"], "correct": 2, "explain": "Ramanand Swami initiated him and later appointed him as his successor."},
+      {"q": "In which village was BAPS founded in 1907?", "options": ["Bochasan", "Gadhada", "Sarangpur", "Vadtal"], "correct": 0, "explain": "Shastriji Maharaj founded BAPS in Bochasan, Gujarat."},
+      {"q": "What does 'Akshardham' mean?", "options": ["A holy river", "A festival", "A prayer book", "The divine, eternal abode of God"], "correct": 3, "explain": "Akshardham is the eternal, divine abode of God."}
+    ],
+    [
+      {"q": "How many shikharbaddha (spired) mandirs did Bhagwan Swaminarayan himself build?", "options": ["Three", "Six", "Nine", "Twelve"], "correct": 1, "explain": "He built mandirs in Ahmedabad, Bhuj, Vadtal, Dholera, Junagadh, and Gadhada."},
+      {"q": "In which year did Bhagwan Swaminarayan end his earthly presence?", "options": ["1801", "1822", "1907", "1830"], "correct": 3, "explain": "Bhagwan Swaminarayan concluded his earthly life in 1830."},
+      {"q": "Which Guru inaugurated Swaminarayan Akshardham in Gandhinagar in 1992?", "options": ["Pramukh Swami Maharaj", "Yogiji Maharaj", "Shastriji Maharaj", "Mahant Swami Maharaj"], "correct": 0, "explain": "Pramukh Swami Maharaj inaugurated Akshardham in Gandhinagar in 1992."},
+      {"q": "Which Guru inaugurated the BAPS Hindu Mandir in Abu Dhabi in February 2024?", "options": ["Pramukh Swami Maharaj", "Yogiji Maharaj", "Mahant Swami Maharaj", "Shastriji Maharaj"], "correct": 2, "explain": "Mahant Swami Maharaj inaugurated the Abu Dhabi mandir in 2024."},
+      {"q": "Gunatitanand Swami served as the head (mahant) of the mandir in which city?", "options": ["Ahmedabad", "Vadtal", "Bhuj", "Junagadh"], "correct": 3, "explain": "Gunatitanand Swami served as the mahant of the Junagadh mandir."}
+    ]
+  ],
+  "Group 3": [
+    [
+      {"q": "In Akshar-Purushottam Upasana, who is Purushottam (Parabrahman)?", "options": ["Bhagwan Swaminarayan", "Gunatitanand Swami", "Shastriji Maharaj", "Pramukh Swami Maharaj"], "correct": 0, "explain": "Purushottam is the supreme God, Bhagwan Swaminarayan."},
+      {"q": "According to Swaminarayan Vedanta, how many eternal entities are there?", "options": ["Three", "Seven", "Five", "Nine"], "correct": 2, "explain": "The five are jiva, ishvara, maya, Aksharbrahman, and Parabrahman."},
+      {"q": "What is 'Swamini Vato'?", "options": ["Letters written by Shastriji Maharaj", "Spiritual talks of Gunatitanand Swami", "Songs sung at Holi", "Rules of the Shikshapatri"], "correct": 1, "explain": "Swamini Vato is a collection of the spiritual talks of Gunatitanand Swami."},
+      {"q": "In the Panch Vartman, 'Nirlobh' means being free from what?", "options": ["Lust", "Ego", "Attachment to family", "Greed"], "correct": 3, "explain": "The five vows: nishkam (no lust), nirlobh (no greed), nisswad (control of taste), nisneh (no attachment), nirman (humility)."},
+      {"q": "What was Pramukh Swami Maharaj's birth name?", "options": ["Vinubhai Patel", "Mulji Sharma", "Shantilal Patel", "Narayan Patel"], "correct": 2, "explain": "Pramukh Swami Maharaj was born Shantilal Patel in Chansad, Gujarat."}
+    ],
+    [
+      {"q": "In which year did Ramanand Swami appoint Sahajanand Swami as his successor at Jetpur?", "options": ["1801", "1792", "1822", "1830"], "correct": 0, "explain": "Ramanand Swami appointed him as his successor in 1801."},
+      {"q": "In which town did Bhagwan Swaminarayan conclude his earthly life in 1830?", "options": ["Vadtal", "Ahmedabad", "Loj", "Gadhada"], "correct": 3, "explain": "He concluded his earthly life in Gadhada in 1830."},
+      {"q": "In which year was the Neasden Mandir in London inaugurated?", "options": ["1985", "1995", "2005", "2015"], "correct": 1, "explain": "The Shri Swaminarayan Mandir in Neasden opened in 1995."},
+      {"q": "In which year was Swaminarayan Akshardham in Gandhinagar inaugurated?", "options": ["1985", "2005", "2007", "1992"], "correct": 3, "explain": "Gandhinagar Akshardham was inaugurated in 1992."},
+      {"q": "Who is considered the third spiritual successor (Guru) in the BAPS lineage?", "options": ["Shastriji Maharaj", "Yogiji Maharaj", "Bhagatji Maharaj", "Pramukh Swami Maharaj"], "correct": 0, "explain": "Shastriji Maharaj was the third Guru, after Gunatitanand Swami and Bhagatji Maharaj."}
+    ],
+    [
+      {"q": "In which year was the Robbinsville Akshardham in New Jersey inaugurated?", "options": ["2019", "2021", "2023", "2024"], "correct": 2, "explain": "The Robbinsville Akshardham was inaugurated in 2023."},
+      {"q": "In Akshar-Purushottam Upasana, Aksharbrahman is the...", "options": ["Another name for Maya", "A temporary soul (jiva)", "An avatar of Brahma", "Ideal devotee and divine abode of Purushottam"], "correct": 3, "explain": "Aksharbrahman is eternally in the service of Purushottam as the ideal devotee and his divine abode."},
+      {"q": "Who authored the Swaminarayan Bhashya, commentaries on the Prasthanatrayi?", "options": ["Bhadreshdas Swami", "Gunatitanand Swami", "Nishkulanand Swami", "Shastriji Maharaj"], "correct": 0, "explain": "The Swaminarayan Bhashya covers the Upanishads, Brahmasutras, and Bhagavad Gita."},
+      {"q": "In which year did Mahant Swami Maharaj become the spiritual head of BAPS?", "options": ["2008", "2012", "2016", "2020"], "correct": 2, "explain": "Mahant Swami Maharaj became the spiritual head of BAPS in 2016."},
+      {"q": "'Gunatit' means one who is beyond the three gunas. What are they?", "options": ["Dharma, artha, and kama", "Sattva, rajas, and tamas", "Brahma, Vishnu, and Shiva", "Jiva, ishvara, and maya"], "correct": 1, "explain": "The three gunas are sattva (purity), rajas (activity), and tamas (inertia)."}
+    ]
+  ]
+};
 
 /* ===================== END EDIT ZONE ===================== */
 
 
 // ---- Render tracker ----
-document.getElementById('currentLoc').textContent = tracker.location;
-document.getElementById('currentDateTime').textContent = tracker.localDateTime;
-document.getElementById('nextStop').textContent = tracker.nextStop;
-document.getElementById('funFact').textContent = tracker.funFact;
+// Map position from latitude / longitude (calibrated to the world-map image)
+const MAP_X = lon => 48.936 + 0.28198 * lon;
+const MAP_Y = lat => 31.8 - 0.6389 * (lat - 51.5074);
+
+function renderTracker(){
+  document.getElementById('currentLoc').textContent = tracker.location;
+  document.getElementById('currentDateTime').textContent = tracker.localDateTime;
+  document.getElementById('nextStop').textContent = tracker.nextStop;
+  document.getElementById('funFact').textContent = tracker.funFact;
+  renderMap();
+}
+
+function renderMap(){
+  const cur = tracker.cur, nxt = tracker.next;
+  const pc = document.getElementById('pinCurrent'), pn = document.getElementById('pinNext');
+  const lc = document.getElementById('pinCurrentLabel'), ln = document.getElementById('pinNextLabel');
+  const path = document.getElementById('routePath');
+  const cx = MAP_X(cur.lon), cy = MAP_Y(cur.lat);
+  pc.style.left = cx + '%'; pc.style.top = cy + '%';
+  lc.textContent = cur.short;
+  lc.style.left = ''; lc.style.right = '';
+  if (!nxt){ pn.style.display = 'none'; path.setAttribute('d', ''); return; }
+  const nx = MAP_X(nxt.lon), ny = MAP_Y(nxt.lat);
+  pn.style.display = 'flex';
+  pn.style.left = nx + '%'; pn.style.top = ny + '%';
+  ln.textContent = nxt.short;
+  // labels go on the outside of the two pins so they don't overlap
+  const flip = nx < cx;
+  lc.style.left  = flip ? '20px' : 'auto';  lc.style.right = flip ? 'auto' : '20px';
+  ln.style.left  = flip ? 'auto' : '20px';  ln.style.right = flip ? '20px' : 'auto';
+  // if the two places are very close on the world map, nudge the next pin so both dots stay visible
+  const close = Math.abs(nx - cx) < 3 && Math.abs(ny - cy) < 3;
+  pn.style.marginLeft = close ? (flip ? '-16px' : '16px') : '0';
+  pn.style.marginTop  = close ? '12px' : '0';
+  const mx = (cx + nx) / 2, my = (cy + ny) / 2 - Math.hypot(nx - cx, ny - cy) * 0.15;
+  path.setAttribute('d', `M${cx},${cy} Q${mx},${my} ${nx},${ny}`);
+}
+renderTracker();
 
 // ---- Render header quote ----
 document.getElementById('headerQuoteText').textContent = headerQuote.text;
 document.getElementById('headerQuoteAuthor').textContent = headerQuote.author;
 
-// ---- Render events list ----
-const list = document.getElementById('eventsList');
-const MONTHS = {JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
-const etNow = new Date(new Date().toLocaleString('en-US', { timeZone: tracker.timeZone }));
-const todayStart = new Date(etNow.getFullYear(), etNow.getMonth(), etNow.getDate());
-events.forEach(ev => {
-  const evDate = new Date(2026, MONTHS[ev.month], ev.day);
-  if (evDate < todayStart) return;               // hide events that already passed
-  const isToday = evDate.getTime() === todayStart.getTime();
-  const row = document.createElement('div');
-  row.className = 'event-row';
-  row.innerHTML = `
-    <div class="event-badge"><div class="m">${ev.month}</div><div class="d">${ev.day}</div></div>
-    <div class="event-info">
-      <div class="name">${ev.name}${isToday ? ' <span style="color:var(--maroon);font-size:10px;font-weight:700;">· TODAY</span>' : ''}</div>
-      <div class="sub">${ev.sub}</div>
-    </div>
-    <div class="event-emoji">${ev.emoji}</div>
-  `;
-  list.appendChild(row);
-});
+// ---- Render events list (only the next 5 upcoming events are shown) ----
+const WEEKDAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+function renderEvents(){
+  const list = document.getElementById('eventsList');
+  list.innerHTML = '';
+  const today = isoToday();
+  events
+    .filter(ev => ev.date >= today)                         // passed events disappear
+    .sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0)
+    .slice(0, MAX_EVENTS)                                   // only the next 5
+    .forEach(ev => {
+      const p = ev.date.split('-').map(Number);
+      const d = new Date(p[0], p[1] - 1, p[2]);
+      const isToday = ev.date === today;
+      const row = document.createElement('div');
+      row.className = 'event-row';
+      row.innerHTML = `
+        <div class="event-badge"><div class="m"></div><div class="d"></div></div>
+        <div class="event-info">
+          <div class="name"></div>
+          <div class="sub"></div>
+        </div>
+        <div class="event-emoji"></div>`;
+      row.querySelector('.m').textContent = MON_NAMES[d.getMonth()].toUpperCase();
+      row.querySelector('.d').textContent = d.getDate();
+      const nm = row.querySelector('.name');
+      nm.textContent = ev.name;
+      if (isToday){
+        const t = document.createElement('span');
+        t.style.cssText = 'color:var(--maroon);font-size:10px;font-weight:700;';
+        t.textContent = ' · TODAY';
+        nm.appendChild(t);
+      }
+      row.querySelector('.sub').textContent = WEEKDAY_NAMES[d.getDay()] + ' · ' + ev.sub;
+      row.querySelector('.event-emoji').textContent = ev.emoji;
+      list.appendChild(row);
+    });
+}
+renderEvents();
 
-// ---- Live clock (shows the time where Swamishri is — set tracker.timeZone above) ----
+// Keep a dashboard that stays open on a screen up to date: when the date changes, refresh everything.
+let lastDay = isoToday();
+setInterval(() => {
+  const now = isoToday();
+  if (now !== lastDay){ lastDay = now; computeTracker(); renderTracker(); renderEvents(); }
+}, 60 * 1000);
+
+// ---- Live clock (uses tracker.timeZone above) ----
 function tzName(now){
   if (tracker.timeZoneLabel) return tracker.timeZoneLabel;
-  const parts = new Intl.DateTimeFormat('en-GB', { timeZone: tracker.timeZone, timeZoneName:'short' }).formatToParts(now);
-  const p = parts.find(x => x.type === 'timeZoneName');
-  return p ? p.value : '';
+  const get = loc => {
+    const p = new Intl.DateTimeFormat(loc, { timeZone: tracker.timeZone, timeZoneName:'short' }).formatToParts(now).find(x => x.type === 'timeZoneName');
+    return p ? p.value : '';
+  };
+  const us = get('en-US');                 // gives EST/EDT for Eastern time
+  return us.startsWith('GMT') ? get('en-GB') : us;   // BST/GMT for the UK, etc.
 }
 function updateClock(){
   const now = new Date();
@@ -677,13 +1030,70 @@ function shuffle(arr){
 
 let quizSet = [];
 
+let quizGroup = null;
+let quizLevel = 0;
+const QUIZ_BEST_KEY = 'nishtaQuizBest_v1';
+let quizBest = {};
+try { quizBest = JSON.parse(localStorage.getItem(QUIZ_BEST_KEY)) || {}; } catch(e){ quizBest = {}; }
+const groupDesc = { 'Group 0':'Beginner', 'Group 1':'Growing', 'Group 2':'Advanced', 'Group 3':'Expert' };
+const levelDesc = ['Easy', 'Medium', 'Hard'];
+
+function setQuizPanel(which){
+  document.getElementById('quizPickGroup').style.display = which === 'group' ? 'block' : 'none';
+  document.getElementById('quizPickLevel').style.display = which === 'level' ? 'block' : 'none';
+  document.getElementById('quizPlay').style.display = which === 'play' ? 'block' : 'none';
+  document.getElementById('quizResults').classList.toggle('show', which === 'results');
+}
+
 function openQuiz(){
+  document.getElementById('quizOverlay').classList.add('open');
+  showGroupPicker();
+}
+
+function showGroupPicker(){
+  setQuizPanel('group');
+  document.getElementById('quizProgress').style.width = '0%';
+  document.getElementById('quizCrumb').textContent = '';
+  const wrap = document.getElementById('qpGroups');
+  wrap.innerHTML = '';
+  Object.keys(quizBank).forEach(g => {
+    const b = document.createElement('button');
+    b.className = 'qp-btn';
+    b.innerHTML = `<div class="qp-name"></div><div class="qp-desc"></div>`;
+    b.querySelector('.qp-name').textContent = g;
+    b.querySelector('.qp-desc').textContent = `${groupDesc[g] || ''} · 3 quizzes`;
+    b.onclick = () => pickGroup(g);
+    wrap.appendChild(b);
+  });
+}
+
+function pickGroup(g){
+  quizGroup = g;
+  setQuizPanel('level');
+  document.getElementById('qpLevelTitle').textContent = `${g}: choose a level`;
+  const wrap = document.getElementById('qpLevels');
+  wrap.innerHTML = '';
+  quizBank[g].forEach((qs, l) => {
+    const b = document.createElement('button');
+    b.className = 'qp-btn';
+    b.innerHTML = `<div class="qp-name"></div><div class="qp-desc"></div><div class="qp-best"></div>`;
+    b.querySelector('.qp-name').textContent = `Level ${l + 1}`;
+    b.querySelector('.qp-desc').textContent = `${levelDesc[l]} · ${qs.length} questions`;
+    const best = quizBest[g + '|' + l];
+    b.querySelector('.qp-best').textContent = (best !== undefined) ? `🏅 Best: ${best} / ${qs.length}` : '';
+    b.onclick = () => startQuiz(g, l);
+    wrap.appendChild(b);
+  });
+}
+
+function startQuiz(g, l){
+  quizGroup = g;
+  quizLevel = l;
   quizIndex = 0;
   quizScore = 0;
-  quizSet = shuffle(quizQuestions);
-  document.getElementById('quizOverlay').classList.add('open');
-  document.getElementById('quizPlay').style.display = 'block';
-  document.getElementById('quizResults').classList.remove('show');
+  quizSet = shuffle(quizBank[g][l]);
+  document.getElementById('quizCrumb').textContent = `${g} · Level ${l + 1} (${levelDesc[l]})`;
+  setQuizPanel('play');
   renderQuestion();
 }
 
@@ -750,6 +1160,12 @@ function showResults(){
   else if (pct >= 0.4){ emoji = '🙂'; msg = 'Nice effort! A little more satsang and you\'ll master it.'; }
   document.getElementById('quizResultEmoji').textContent = emoji;
   document.getElementById('quizResultMsg').textContent = msg;
+  const bk = quizGroup + '|' + quizLevel;
+  if (quizBest[bk] === undefined || quizScore > quizBest[bk]){
+    quizBest[bk] = quizScore;
+    try { localStorage.setItem(QUIZ_BEST_KEY, JSON.stringify(quizBest)); } catch(e){}
+  }
+  document.getElementById('qrNext').style.display = (quizLevel < quizBank[quizGroup].length - 1) ? '' : 'none';
 }
 
 document.getElementById('quizOverlay').addEventListener('click', (e) => {
@@ -757,5 +1173,202 @@ document.getElementById('quizOverlay').addEventListener('click', (e) => {
 });
 </script>
 
+
+<!-- ============ BAL SABHA RULES (same page, shown when you tap VIEW) ============ -->
+<div class="tv" id="rulesView">
+  <div class="rv-top">
+    <div class="rv-brand"><div class="rv-lion">🦁</div><div class="rv-name">NISHTA NETWORK</div></div>
+    <button class="rv-back" onclick="showDash()">← Back to Dashboard</button>
+  </div>
+  <h1 class="rv-title">📜 BAL SABHA RULES</h1>
+  <div class="rv-sub">Please read and follow these rules during every Bal Sabha.</div>
+  <ol class="rv-list">
+      <li class="rv-rule"><span class="rv-num">1</span><span class="rv-txt">Respect the speaker. No talking while the presenter is speaking.</span></li>
+      <li class="rv-rule"><span class="rv-num">2</span><span class="rv-txt">Raise your hand. Wait to be called on before speaking.</span></li>
+      <li class="rv-rule"><span class="rv-num">3</span><span class="rv-txt">Keep your hands and feet to yourself.</span></li>
+      <li class="rv-rule"><span class="rv-num">4</span><span class="rv-txt">Use inside voices only. No shouting or yelling.</span></li>
+      <li class="rv-rule"><span class="rv-num">5</span><span class="rv-txt">No eating. Water only.</span></li>
+      <li class="rv-rule"><span class="rv-num">6</span><span class="rv-txt">Respect your karyakars. Listen to them and follow their instructions.</span></li>
+      <li class="rv-rule"><span class="rv-num">7</span><span class="rv-txt">Be respectful to everyone. No teasing, bullying, or inappropriate language.</span></li>
+      <li class="rv-rule"><span class="rv-num">8</span><span class="rv-txt">Stay seated and pay attention during presentations.</span></li>
+      <li class="rv-rule"><span class="rv-num">9</span><span class="rv-txt">No running or playing around during Bal Sabha.</span></li>
+      <li class="rv-rule"><span class="rv-num">10</span><span class="rv-txt">Keep the room clean. Pick up after yourself.</span></li>
+      <li class="rv-rule"><span class="rv-num">11</span><span class="rv-txt">Participate with a positive attitude in all activities.</span></li>
+      <li class="rv-rule"><span class="rv-num">12</span><span class="rv-txt">Keep phones and other distractions away unless permitted.</span></li>
+      <li class="rv-rule"><span class="rv-num">13</span><span class="rv-txt">Be on time and ready for Bal Sabha.</span></li>
+      <li class="rv-rule"><span class="rv-num">14</span><span class="rv-txt">Respect the mandir. Behave appropriately in all sacred spaces.</span></li>
+      <li class="rv-rule"><span class="rv-num">15</span><span class="rv-txt">Follow BAPS values. Show humility, discipline, kindness, and respect.</span></li>
+  </ol>
+  <div class="rv-note">⭐ These are the main rules!</div>
+</div>
+
+<!-- ============ POINTS SYSTEM (same page, shown when you tap OPEN) ============ -->
+<div class="tv" id="pointsView">
+  <div class="pv-top">
+    <div class="pv-brand"><div class="pv-lion">🦁</div><div class="pv-name">NISHTA NETWORK</div></div>
+    <button class="pv-back" onclick="showDash()">← Back to Dashboard</button>
+  </div>
+  <h1 class="pv-title">⭐ POINTS</h1>
+  <div class="pv-sub">Pick a group, choose how many points per tap, then use + to give or − to take away points.</div>
+  <div class="pv-tabs" id="pvTabs"></div>
+  <div class="pv-amount" id="pvAmount"></div>
+  <div class="pv-total" id="pvTotal"></div>
+  <ul class="pv-list" id="pvList"></ul>
+  <div class="pv-actions"><button class="pv-reset" onclick="resetPoints()">Reset all points to 0</button></div>
+  <div class="pv-note">Points are saved on this device and browser.</div>
+</div>
+
+<script>
+// Switch between the dashboard, Bal Sabha Rules and Points views (all in this one file)
+const VIEWS = { rules:'rulesView', points:'pointsView' };
+function showView(name){
+  document.getElementById('dashView').style.display = 'none';
+  Object.values(VIEWS).forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById(VIEWS[name]).style.display = 'block';
+  window.scrollTo(0,0);
+  if (location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+}
+function showRules(){ showView('rules'); }
+function showPoints(){ showView('points'); }
+function showDash(){
+  Object.values(VIEWS).forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById('dashView').style.display = '';
+  window.scrollTo(0,0);
+  history.replaceState(null, '', location.pathname + location.search);
+}
+if (location.hash === '#rules') showRules();
+if (location.hash === '#points') showPoints();
+
+// ---------- Points system ----------
+// To add or remove kids, just edit the names in this list. Everyone starts at 0.
+const pointGroups = {
+  "Group 0": [
+    "Dhruvbhai Patel",
+    "Jacebhai Patel",
+    "Ritvikbhai Patel"
+  ],
+  "Group 1": [
+    "Aksharbhai Patel",
+    "Aksharbhai Pandya",
+    "Darshanbhai Patel",
+    "Jarnavbhai Modi",
+    "Jiyaanbhai Shah",
+    "Rajbhai Lakhani",
+    "Vivanbhai Vavadiya",
+    "Yugbhai Patel"
+  ],
+  "Group 2": [
+    "Aaravbhai Patel",
+    "Akshatbhai Patel",
+    "Ansilbhai Patel",
+    "Arhabhai Patel",
+    "Haribhai Patel",
+    "Jaybhai Patel",
+    "Kesavbhai Patel",
+    "Maanbhai Patel",
+    "Pravikbhai Modi",
+    "Reyaanbhai Patel",
+    "Reyanshbhai Patel",
+    "Rishibhai Patel",
+    "Riyaanbhai Patel",
+    "Rudrabhai Patel",
+    "Veerbhai Patel",
+    "Veerbhai Lakhani",
+    "Vihanbhai Patel"
+  ],
+  "Group 3": [
+    "Aaravbhai Raval",
+    "Ahilbhai Patel",
+    "Darshbhai Raval",
+    "Ishanbhai Chhatbar",
+    "Nilkanthbhai Joshi",
+    "Shivbhai Patel",
+    "Vanshbhai Patel"
+  ]
+};
+
+const POINTS_KEY = 'nishtaPoints_v1';
+let pointsData = {};
+let activeGroup = Object.keys(pointGroups)[0];
+let pointStep = 1;   // how many points each + or − button gives or takes away
+
+function renderAmount(){
+  const wrap = document.getElementById('pvAmount');
+  wrap.innerHTML = '<span class="pv-amt-label">Points per tap:</span>';
+  [1, 2, 3, 5, 10].forEach(n => {
+    const b = document.createElement('button');
+    b.className = 'pv-chip' + (n === pointStep ? ' active' : '');
+    b.textContent = n;
+    b.onclick = () => { pointStep = n; renderPoints(); };
+    wrap.appendChild(b);
+  });
+  const inp = document.createElement('input');
+  inp.type = 'number'; inp.min = '1'; inp.max = '999'; inp.placeholder = 'Other';
+  inp.className = 'pv-custom';
+  if (![1,2,3,5,10].includes(pointStep)) inp.value = pointStep;
+  inp.onchange = () => {
+    const v = Math.floor(Number(inp.value));
+    if (v >= 1 && v <= 999){ pointStep = v; renderPoints(); }
+  };
+  wrap.appendChild(inp);
+}
+
+function loadPoints(){
+  try { pointsData = JSON.parse(localStorage.getItem(POINTS_KEY)) || {}; } catch(e){ pointsData = {}; }
+}
+function savePoints(){
+  try { localStorage.setItem(POINTS_KEY, JSON.stringify(pointsData)); } catch(e){}
+}
+const kidKey = (g, name) => g + '|' + name;
+const getPts = (g, name) => pointsData[kidKey(g, name)] || 0;
+
+function renderPoints(){
+  renderAmount();
+  const tabs = document.getElementById('pvTabs');
+  tabs.innerHTML = '';
+  Object.keys(pointGroups).forEach(g => {
+    const b = document.createElement('button');
+    b.className = 'pv-tab' + (g === activeGroup ? ' active' : '');
+    b.textContent = g;
+    b.onclick = () => { activeGroup = g; renderPoints(); };
+    tabs.appendChild(b);
+  });
+
+  const kids = pointGroups[activeGroup];
+  const total = kids.reduce((sum, n) => sum + getPts(activeGroup, n), 0);
+  document.getElementById('pvTotal').innerHTML = `${activeGroup} total: <b>${total}</b> points`;
+
+  const list = document.getElementById('pvList');
+  list.innerHTML = '';
+  kids.forEach(name => {
+    const li = document.createElement('li');
+    li.className = 'pv-kid';
+    li.innerHTML = `<span class="pv-kname"></span>
+      <button class="pv-btn minus" title="Take away points">− ${pointStep}</button>
+      <span class="pv-pts">${getPts(activeGroup, name)}</span>
+      <button class="pv-btn plus" title="Give points">+ ${pointStep}</button>`;
+    li.querySelector('.pv-kname').textContent = name;
+    const [minus, plus] = li.querySelectorAll('button');
+    minus.onclick = () => changePoints(name, -pointStep);
+    plus.onclick  = () => changePoints(name, pointStep);
+    list.appendChild(li);
+  });
+}
+function changePoints(name, delta){
+  const k = kidKey(activeGroup, name);
+  pointsData[k] = Math.max(0, (pointsData[k] || 0) + delta);
+  savePoints();
+  renderPoints();
+}
+function resetPoints(){
+  if (!confirm('Reset ALL points for every group back to 0?')) return;
+  pointsData = {};
+  savePoints();
+  renderPoints();
+}
+loadPoints();
+renderPoints();
+
+</script>
 </body>
 </html>
